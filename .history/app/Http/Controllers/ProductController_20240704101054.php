@@ -74,8 +74,8 @@ class ProductController extends Controller
 
         $product = Product::find($productId);
         if ($product) {
-
-            $related = Product::where('category_name', '=', $product->category_name)->get();
+            
+            $related = Product::where('category_name', '=', $product->category_name)->take(6)->get();
 
             return view('product.show', compact('product', 'related', 'productCart', 'productImages'));
         }
