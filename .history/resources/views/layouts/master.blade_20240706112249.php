@@ -130,14 +130,11 @@
                                 <li>
                                     <div class="header-icons">
                                         @if (Auth::check())
-                                            @php
-                                                $productsCountInCart = DB::table('carts')->where('user_id', Auth::user()->id)->count()
-                                            @endphp
-                                            <a class="shopping-cart" href="{{ route('cart.show', Auth::user()->id ) }}">
-                                                <i class="fas fa-shopping-cart">
-                                                </i>
-                                                <span class="orange-text">{{ $productsCountInCart }}</span>
-                                            </a>
+                                        <a class="shopping-cart" href="{{ route('cart.show', Auth::user()->id ) }}">
+                                            <i class="fas fa-shopping-cart">
+                                            </i>
+                                            <span class="orange-text">{{ $productsCountInCart }}</span>
+                                        </a>
                                         @endif
                                         <a class="mobile-hide search-bar-icon" href="#">
                                             <i class="fas fa-search"></i>
