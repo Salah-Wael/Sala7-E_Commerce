@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\OrderRecipient;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -46,7 +47,7 @@ Route::get('/orders', function () {
     $orderRecipients = OrderRecipient::with('orders.product')->get();
     $orderRecipients->each(function ($recipient) {
         $recipient->orders->subtotal = PriceController::subTotal($recipient->orders);
-    })->middleware('admin');
+    })->middleware('');
 
     return view('admin.all-checkout-orders')->with(['orderRecipients' => $orderRecipients]);
 })->name('orders');
@@ -73,17 +74,17 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('/all-products', 'productsTable')->name('product.table')->middleware('auth');
     Route::get('/product/create', 'create')->name('product.create')->middleware('admin');
 
-    Route::post('/product/store', 'store')->name('product.store')->middleware('admin');
+    Route::post('/product/store', 'store')->name('product.store')->middleware('auth');
     Route::get('/product/{id}', 'show')->name('product.show')->middleware('auth');
-    Route::get('/product/{id}/edit', 'edit')->name('product.edit')->middleware('admin');
-    Route::put('/product/{id}', 'update')->name('product.update')->middleware('admin');
-    Route::delete('/product/{id}/delete', 'delete')->name('product.delete')->middleware('admin');
+    Route::get('/product/{id}/edit', 'edit')->name('product.edit')->middleware('auth');
+    Route::put('/product/{id}', 'update')->name('product.update')->middleware('auth');
+    Route::delete('/product/{id}/delete', 'delete')->name('product.delete')->middleware('auth');
 });
 
 Route::controller(ProductImagesController::class)->group(function () {
 
     Route::get('/product/{productId}/images', 'showProductImages')->name('product.show.images')->middleware('auth');
-    Route::post('/product/{productId}/store/images', 'storeImages')->name('product.store.images')->middleware('admin');
-    Route::delete('/product/image/{imageId}/delete', 'deleteImage')->name('product.delete.image')->middleware('admin');
+    Route::post('/product/{productId}/store/images', 'storeImages')->name('product.store.images')->middleware('auth');
+    Route::delete('/product/image/{imageId}/delete', 'deleteImage')->name('product.delete.image')->middleware('auth');
 });
 

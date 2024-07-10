@@ -10,9 +10,9 @@ class ErrorController extends Controller
     {
         return view('error.404');
     }
-
-    public function error401()
+    
+    public function error404()
     {
-        return view('error.401');
+        return view('error.404');
     }
 }

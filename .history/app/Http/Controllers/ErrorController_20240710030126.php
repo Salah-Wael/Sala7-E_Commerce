@@ -13,6 +13,6 @@ class ErrorController extends Controller
 
     public function error401()
     {
-        return view('error.401');
+        return view('error.404');
     }
 }

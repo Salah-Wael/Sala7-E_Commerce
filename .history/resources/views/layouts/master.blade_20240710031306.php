@@ -75,6 +75,7 @@
                                             <li><a href="{{ route('product.create') }}">Create Product</a></li>
                                             <li><a href="{{ route('product.table') }}">Products Table</a></li>
                                             <li><a href="{{ route('orders') }}">ALL Orders</a></li>
+                                            {{-- <li><a href="404.html">404 page</a></li>
                                             <li><a href="checkout.html">Check Out</a></li>
                                             <li><a href="shop.html">Shop</a></li> --}}
                                         </ul>

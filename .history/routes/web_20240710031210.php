@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\OrderRecipient;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -83,7 +84,7 @@ Route::controller(ProductController::class)->group(function () {
 Route::controller(ProductImagesController::class)->group(function () {
 
     Route::get('/product/{productId}/images', 'showProductImages')->name('product.show.images')->middleware('auth');
-    Route::post('/product/{productId}/store/images', 'storeImages')->name('product.store.images')->middleware('admin');
-    Route::delete('/product/image/{imageId}/delete', 'deleteImage')->name('product.delete.image')->middleware('admin');
+    Route::post('/product/{productId}/store/images', 'storeImages')->name('product.store.images')->middleware('auth');
+    Route::delete('/product/image/{imageId}/delete', 'deleteImage')->name('product.delete.image')->middleware('auth');
 });
 
