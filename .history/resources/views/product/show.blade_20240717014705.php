@@ -27,7 +27,7 @@
 	<div class="single-product mt-150 mb-150">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-5">
+				<div class="col-md-4">
 					<!-- testimonail-section -->
                     <div class="testimonial-sliders" >
                         

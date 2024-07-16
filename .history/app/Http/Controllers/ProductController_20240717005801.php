@@ -86,9 +86,9 @@ class ProductController extends Controller
                 ->orderBy('price', 'desc')
                 ->get();
 
-            $qrCode = QrCode::size(300)->generate('https://sala7.great-site.net/product/'.$productId);
+            $qrCode = QrCode::size(300)->generate('https://sala7.great-site.net/');
 
-            return view('product.show', compact('product', 'related', 'productCart', 'productImages', 'qrCode'));
+            return view('product.show', compact('product', 'related', 'productCart', 'productImages'));
         }
 
         // Return custom 404 view if product is not found

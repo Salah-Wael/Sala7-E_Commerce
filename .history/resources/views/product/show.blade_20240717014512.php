@@ -91,7 +91,7 @@
 					    </div>
 				    </div>
 			    </div>
-                <div class="col-md-4">
+                <div class="col-md-3" style="width: 100px; height: 100px;">
                     {{ $qrCode }}
                 </div>
 		    </div>

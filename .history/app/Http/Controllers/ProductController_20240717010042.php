@@ -88,7 +88,7 @@ class ProductController extends Controller
 
             $qrCode = QrCode::size(300)->generate('https://sala7.great-site.net/product/'.$productId);
 
-            return view('product.show', compact('product', 'related', 'productCart', 'productImages', 'qrCode'));
+            return view('product.show', compact('product', 'related', 'productCart', 'productImages', qrCode));
         }
 
         // Return custom 404 view if product is not found

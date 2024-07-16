@@ -53,7 +53,7 @@
                     
                     <!-- end testimonail-section -->
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<div class="single-product-content">
 						<h3>{{ $product->description }}</h3>
 						<p class="single-product-pricing"><span>Per Kg</span> {{ $product->price }}</p>

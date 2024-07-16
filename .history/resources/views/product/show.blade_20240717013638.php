@@ -53,7 +53,7 @@
                     
                     <!-- end testimonail-section -->
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-7">
 					<div class="single-product-content">
 						<h3>{{ $product->description }}</h3>
 						<p class="single-product-pricing"><span>Per Kg</span> {{ $product->price }}</p>
@@ -81,21 +81,20 @@
                             {{ __('Add to Cart') }}
                             </a>
 							<p><strong>Categories: </strong>{{ $product->category_name }}</p>
-                            <h4>Share:</h4>
-                            <ul class="product-share">
-                                <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                                <li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
-                                <li><a href=""><i class="fab fa-linkedin"></i></a></li>
-                            </ul>
-					    </div>
-				    </div>
-			    </div>
-                <div class="col-md-4">
+						<h4>Share:</h4>
+						<ul class="product-share">
+							<li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href=""><i class="fab fa-twitter"></i></a></li>
+							<li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+							<li><a href=""><i class="fab fa-linkedin"></i></a></li>
+						</ul>
+					</div>
+				</div>
+                <div style="width: 100px; height: 100px;">
                     {{ $qrCode }}
                 </div>
-		    </div>
-	    </div>
+			</div>
+		</div>
 	</div>
 	<!-- end single product -->
 

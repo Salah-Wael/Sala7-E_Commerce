@@ -30,14 +30,14 @@
 				<div class="col-md-5">
 					<!-- testimonail-section -->
                     <div class="testimonial-sliders" >
-                        
                         <div class="single-testimonial-slider" style="height: 100px !important;">
                             <div class="single-product-img" >
                                 <img src="{{ asset('assets/img/products/'.$product->image_path) }}" alt="{{ $product->name }}">
                             </div>
-                            
+                            <div>
+                                {{ $qrCode }}
+                            </div>
                         </div>
-
                         @forelse ($productImages as $productImage)
                             <div class="single-testimonial-slider">
                                 <div class="single-product-img" >
@@ -50,10 +50,9 @@
                                 </div>
                         @endforelse
                     </div>
-                    
                     <!-- end testimonail-section -->
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-7">
 					<div class="single-product-content">
 						<h3>{{ $product->description }}</h3>
 						<p class="single-product-pricing"><span>Per Kg</span> {{ $product->price }}</p>
@@ -81,21 +80,17 @@
                             {{ __('Add to Cart') }}
                             </a>
 							<p><strong>Categories: </strong>{{ $product->category_name }}</p>
-                            <h4>Share:</h4>
-                            <ul class="product-share">
-                                <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                                <li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
-                                <li><a href=""><i class="fab fa-linkedin"></i></a></li>
-                            </ul>
-					    </div>
-				    </div>
-			    </div>
-                <div class="col-md-4">
-                    {{ $qrCode }}
-                </div>
-		    </div>
-	    </div>
+						<h4>Share:</h4>
+						<ul class="product-share">
+							<li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href=""><i class="fab fa-twitter"></i></a></li>
+							<li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+							<li><a href=""><i class="fab fa-linkedin"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<!-- end single product -->
 

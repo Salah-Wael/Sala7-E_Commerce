@@ -9,7 +9,6 @@ use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProductController extends Controller
@@ -86,9 +85,9 @@ class ProductController extends Controller
                 ->orderBy('price', 'desc')
                 ->get();
 
-            $qrCode = QrCode::size(300)->generate('https://sala7.great-site.net/product/'.$productId);
+            
 
-            return view('product.show', compact('product', 'related', 'productCart', 'productImages', 'qrCode'));
+            return view('product.show', compact('product', 'related', 'productCart', 'productImages'));
         }
 
         // Return custom 404 view if product is not found

@@ -89,11 +89,11 @@
                                 <li><a href=""><i class="fab fa-linkedin"></i></a></li>
                             </ul>
 					    </div>
-				    </div>
-			    </div>
-                <div class="col-md-4">
+				</div>
+                <div class="col-md-5" style="width: 100px; height: 100px;">
                     {{ $qrCode }}
                 </div>
+			    </div>
 		    </div>
 	    </div>
 	</div>
