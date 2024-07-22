@@ -96,3 +96,12 @@
 	</div>
 	<!-- end logo carousel -->
 @endsection
+
+@section('css')
+    <style>
+        svg {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+@endsection
