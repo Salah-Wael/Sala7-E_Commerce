@@ -14,8 +14,8 @@ class Tag extends Model
         'tag'
     ];
 
-    // const CREATED_AT = null;
-    // const UPDATED_AT = null;
+    const CREATED_AT = null;
+    const UPDATED_AT = null;
 
     public $timestamps = false;
 

@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
             SalesmanSeeder::class,
             CountriesTableSeeder::class,
         ]);
+        $this->call();
     }
 }
