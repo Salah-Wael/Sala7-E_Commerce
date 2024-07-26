@@ -48,8 +48,9 @@
             <div class="row">
                 <div class="col-lg-8 col-md-12">
                     <div class="cart-table-wrap">
-                        <form id="update-cart" action="{{ route('cart.quantities.update') }}">
+                        <form id="update-cart" action="{{ route('cart.quantities.update') }}" method="POST">
                         @csrf
+                        @method('PUT')
                             <table class="cart-table">
                                 <thead class="cart-table-head">
                                     <tr class="table-head-row">
@@ -63,29 +64,23 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($productsCart->products as $product)
-                                        @php
-                                            $cart = $carts->firstWhere('product_id', $product->id);
-                                        @endphp
+                                    @php
+                                        $cart = $carts->firstWhere('product_id', $product->id);
+                                    @endphp
                                         <tr class="table-body-row">
                                             <td class="product-remove">
-                                                <a href="{{ route('cart.delete', $product->id) }}"
-                                                    onclick="event.preventDefault();
-                                                    document.getElementById('delete-product-{{ $product->id }}-from-cart').submit();">
+                                            <a href="{{ route('cart.delete', $product->id) }}"
+                                                onclick="event.preventDefault();
+                                                document.getElementById('delete-product-{{ $product->id }}-from-cart').submit();">
 
-                                                    <i class="far fa-window-close"></i>
-                                                </a>
+                                                <i class="far fa-window-close"></i>
+                                            </a>
                                             </td>
-                                            <form id="delete-product-{{ $product->id }}-from-cart"
-                                                action="{{ route('cart.delete', $product->id) }}" d
-                                                class="d-none">
+                                            <form id="delete-product-{{ $product->id }}-from-cart" action="{{ route('cart.delete', $product->id) }}" method="POST" class="d-none">
                                                 @csrf
+                                                @method('DELETE')
                                             </form>
-                                            <td class="product-image">
-                                                <imgd
-                                                    src="{{ asset('assets/img/products/' . $product->image_path) }}"
-                                                    alt="{{ $product->name }}"
-                                                >
-                                            </td>
+                                            <td class="product-image"><img src= "{{ asset('assets/img/products/'.$product->image_path) }}" alt=""></td>
                                             <td class="product-name">
                                                 <a href="{{ route('product.show', $product->id) }}">
                                                     {{ $product->name }}
@@ -94,16 +89,13 @@
 
                                             <td class="product-price">{{ $product->price }}</td>
                                             <td class="product-quantity">
-                                                <input type="number" name="quantities[{{ $cart->product_id }}]"
-                                                    min="{{ $product->quantity }}" step="{{ $product->quantity }}"
-                                                    value="{{ $cart->quantity }}">
+                                                <input type="number" name="quantities[{{ $cart->product_id }}]" min="{{ $product->quantity }}" step="{{ $product->quantity }}" value="{{ $cart->quantity }}">
                                             </td>
-                                            <td class="product-total">{{ $product->price * $cart->quantity }}</td>
+                                            <td class="product-total">{{ $product->price*$cart->quantity }}</td>
                                         </tr>
                                     @empty
                                         You Don't select any Products
                                     @endforelse
-
                                 </tbody>
                             </table>
                         </form>
@@ -135,7 +127,8 @@
                             </tbody>
                         </table>
                         <div class="cart-buttons">
-                            <a href="{{ route('cart.quantities.update') }}" class="boxed-btn"
+                            <a href="{{ route('cart.quantities.update') }}"
+                                class="boxed-btn"
                                 onclick="event.preventDefault();
                                 document.getElementById('update-cart').submit();">
                                 {{ __('Check Out') }}
@@ -187,3 +180,5 @@
     </div>
     <!-- end logo carousel -->
 @endsection
+
+

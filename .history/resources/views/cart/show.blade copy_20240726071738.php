@@ -43,72 +43,7 @@
     <!-- end breadcrumb section -->
 
     <!-- cart -->
-    <div class="cart-section mt-150 mb-150">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-12">
-                    <div class="cart-table-wrap">
-                        <form id="update-cart" action="{{ route('cart.quantities.update') }}">
-                        @csrf
-                            <table class="cart-table">
-                                <thead class="cart-table-head">
-                                    <tr class="table-head-row">
-                                        <th class="product-remove"></th>
-                                        <th class="product-image">Product Image</th>
-                                        <th class="product-name">Name</th>
-                                        <th class="product-price">Price</th>
-                                        <th class="product-quantity">Quantity</th>
-                                        <th class="product-total">Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse ($productsCart->products as $product)
-                                        @php
-                                            $cart = $carts->firstWhere('product_id', $product->id);
-                                        @endphp
-                                        <tr class="table-body-row">
-                                            <td class="product-remove">
-                                                <a href="{{ route('cart.delete', $product->id) }}"
-                                                    onclick="event.preventDefault();
-                                                    document.getElementById('delete-product-{{ $product->id }}-from-cart').submit();">
-
-                                                    <i class="far fa-window-close"></i>
-                                                </a>
-                                            </td>
-                                            <form id="delete-product-{{ $product->id }}-from-cart"
-                                                action="{{ route('cart.delete', $product->id) }}" d
-                                                class="d-none">
-                                                @csrf
-                                            </form>
-                                            <td class="product-image">
-                                                <imgd
-                                                    src="{{ asset('assets/img/products/' . $product->image_path) }}"
-                                                    alt="{{ $product->name }}"
-                                                >
-                                            </td>
-                                            <td class="product-name">
-                                                <a href="{{ route('product.show', $product->id) }}">
-                                                    {{ $product->name }}
-                                                </a>
-                                            </td>
-
-                                            <td class="product-price">{{ $product->price }}</td>
-                                            <td class="product-quantity">
-                                                <input type="number" name="quantities[{{ $cart->product_id }}]"
-                                                    min="{{ $product->quantity }}" step="{{ $product->quantity }}"
-                                                    value="{{ $cart->quantity }}">
-                                            </td>
-                                            <td class="product-total">{{ $product->price * $cart->quantity }}</td>
-                                        </tr>
-                                    @empty
-                                        You Don't select any Products
-                                    @endforelse
-
-                                </tbody>
-                            </table>
-                        </form>
-                    </div>
-                </div>
+     -->
 
                 <div class="col-lg-4">
                     <div class="total-section">
@@ -135,7 +70,8 @@
                             </tbody>
                         </table>
                         <div class="cart-buttons">
-                            <a href="{{ route('cart.quantities.update') }}" class="boxed-btn"
+                            <a href="{{ route('cart.quantities.update') }}"
+                                class="boxed-btn"
                                 onclick="event.preventDefault();
                                 document.getElementById('update-cart').submit();">
                                 {{ __('Check Out') }}
@@ -187,3 +123,5 @@
     </div>
     <!-- end logo carousel -->
 @endsection
+
+

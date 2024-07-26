@@ -76,12 +76,13 @@
                                                 </a>
                                             </td>
                                             <form id="delete-product-{{ $product->id }}-from-cart"
-                                                action="{{ route('cart.delete', $product->id) }}" d
+                                                action="{{ route('cart.delete', $product->id) }}" 
+                                                {{-- method="GET" --}}
                                                 class="d-none">
                                                 @csrf
                                             </form>
                                             <td class="product-image">
-                                                <imgd
+                                                <img
                                                     src="{{ asset('assets/img/products/' . $product->image_path) }}"
                                                     alt="{{ $product->name }}"
                                                 >

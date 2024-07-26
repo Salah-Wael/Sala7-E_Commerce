@@ -76,7 +76,7 @@
                                                 </a>
                                             </td>
                                             <form id="delete-product-{{ $product->id }}-from-cart"
-                                                action="{{ route('cart.delete', $product->id) }}" d
+                                                action="{{ route('cart.delete', $product->id) }}" 
                                                 class="d-none">
                                                 @csrf
                                             </form>

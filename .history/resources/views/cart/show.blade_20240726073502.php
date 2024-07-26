@@ -49,7 +49,7 @@
                 <div class="col-lg-8 col-md-12">
                     <div class="cart-table-wrap">
                         <form id="update-cart" action="{{ route('cart.quantities.update') }}">
-                        @csrf
+                            @csrf
                             <table class="cart-table">
                                 <thead class="cart-table-head">
                                     <tr class="table-head-row">
@@ -76,12 +76,14 @@
                                                 </a>
                                             </td>
                                             <form id="delete-product-{{ $product->id }}-from-cart"
-                                                action="{{ route('cart.delete', $product->id) }}" d
+                                                action="{{ route('cart.delete', $product->id) }}" 
+                                                {{-- method="GET" --}}
                                                 class="d-none">
                                                 @csrf
+                                                {{-- @method('DELETE') --}}
                                             </form>
                                             <td class="product-image">
-                                                <imgd
+                                                <img
                                                     src="{{ asset('assets/img/products/' . $product->image_path) }}"
                                                     alt="{{ $product->name }}"
                                                 >

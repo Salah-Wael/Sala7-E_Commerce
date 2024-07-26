@@ -48,65 +48,58 @@
             <div class="row">
                 <div class="col-lg-8 col-md-12">
                     <div class="cart-table-wrap">
-                        <form id="update-cart" action="{{ route('cart.quantities.update') }}">
+                        <form id="update-cart" action="{{ route('cart.quantities.update') }}" method="POST">
                         @csrf
-                            <table class="cart-table">
-                                <thead class="cart-table-head">
-                                    <tr class="table-head-row">
-                                        <th class="product-remove"></th>
-                                        <th class="product-image">Product Image</th>
-                                        <th class="product-name">Name</th>
-                                        <th class="product-price">Price</th>
-                                        <th class="product-quantity">Quantity</th>
-                                        <th class="product-total">Total</th>
+                        @method('PUT')
+                        <table class="cart-table">
+                            <thead class="cart-table-head">
+                                <tr class="table-head-row">
+                                    <th class="product-remove"></th>
+                                    <th class="product-image">Product Image</th>
+                                    <th class="product-name">Name</th>
+                                    <th class="product-price">Price</th>
+                                    <th class="product-quantity">Quantity</th>
+                                    <th class="product-total">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($productsCart->products as $product)
+                                @php
+                                    $cart = $carts->firstWhere('product_id', $product->id);
+                                @endphp
+                                    <tr class="table-body-row">
+                                        <td class="product-remove">
+                                        <a href="{{ route('cart.delete', $product->id) }}"
+                                            onclick="event.preventDefault();
+                                            document.getElementById('delete-product-from-cart-form-{{ $product->id }}').submit();">
+
+                                            <i class="far fa-window-close"></i>
+                                        </a>
+                                        </td>
+                                        <form id="delete-form-{{ $product->id }}" action="{{ route('cart.delete', $product->id) }}" method="POST" class="d-none">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                        <td class="product-image"><img src= "{{ asset('assets/img/products/'.$product->image_path) }}" alt=""></td>
+                                        <td class="product-name">
+                                            <a href="{{ route('product.show', $product->id) }}">
+                                                {{ $product->name }}
+                                            </a>
+                                        </td>
+
+                                        <td class="product-price">{{ $product->price }}</td>
+                                        <td class="product-quantity">
+                                            <input type="number" name="quantities[{{ $cart->product_id }}]" min="{{ $product->quantity }}" step="{{ $product->quantity }}" value="{{ $cart->quantity }}">
+                                        </td>
+                                        <td class="product-total">{{ $product->price*$cart->quantity }}</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse ($productsCart->products as $product)
-                                        @php
-                                            $cart = $carts->firstWhere('product_id', $product->id);
-                                        @endphp
-                                        <tr class="table-body-row">
-                                            <td class="product-remove">
-                                                <a href="{{ route('cart.delete', $product->id) }}"
-                                                    onclick="event.preventDefault();
-                                                    document.getElementById('delete-product-{{ $product->id }}-from-cart').submit();">
+                                @empty
+                                    You Don't select any Products
+                                @endforelse
 
-                                                    <i class="far fa-window-close"></i>
-                                                </a>
-                                            </td>
-                                            <form id="delete-product-{{ $product->id }}-from-cart"
-                                                action="{{ route('cart.delete', $product->id) }}" d
-                                                class="d-none">
-                                                @csrf
-                                            </form>
-                                            <td class="product-image">
-                                                <imgd
-                                                    src="{{ asset('assets/img/products/' . $product->image_path) }}"
-                                                    alt="{{ $product->name }}"
-                                                >
-                                            </td>
-                                            <td class="product-name">
-                                                <a href="{{ route('product.show', $product->id) }}">
-                                                    {{ $product->name }}
-                                                </a>
-                                            </td>
-
-                                            <td class="product-price">{{ $product->price }}</td>
-                                            <td class="product-quantity">
-                                                <input type="number" name="quantities[{{ $cart->product_id }}]"
-                                                    min="{{ $product->quantity }}" step="{{ $product->quantity }}"
-                                                    value="{{ $cart->quantity }}">
-                                            </td>
-                                            <td class="product-total">{{ $product->price * $cart->quantity }}</td>
-                                        </tr>
-                                    @empty
-                                        You Don't select any Products
-                                    @endforelse
-
-                                </tbody>
-                            </table>
-                        </form>
+                            </tbody>
+                        </table>
+                    </form>
                     </div>
                 </div>
 
@@ -135,7 +128,8 @@
                             </tbody>
                         </table>
                         <div class="cart-buttons">
-                            <a href="{{ route('cart.quantities.update') }}" class="boxed-btn"
+                            <a href="{{ route('cart.quantities.update') }}"
+                                class="boxed-btn"
                                 onclick="event.preventDefault();
                                 document.getElementById('update-cart').submit();">
                                 {{ __('Check Out') }}
@@ -187,3 +181,5 @@
     </div>
     <!-- end logo carousel -->
 @endsection
+
+

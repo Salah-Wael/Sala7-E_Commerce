@@ -83,8 +83,8 @@ Route::get('/orders', function () {
 Route::controller(CartController::class)->group(function () {
     Route::get('/cart', 'show')->name('cart.show')                                           ->middleware('auth');
     Route::post('/cart/{productId}/store', 'store')->name('cart.store')                      ->middleware('auth');
-    Route::put('/cart/update-quantities', 'updateQuantities')->name('cart.quantities.update')->middleware('auth');
-    Route::delete('/cart/{id}/delete', 'deleteProductFromCart')->name('cart.delete')         ->middleware('auth');
+    Route::get('/cart/update-quantities', 'updateQuantities')->name('cart.quantities.update')->middleware('auth');
+    Route::get('/cart/{id}/delete', 'deleteProductFromCart')->name('cart.delete')         ->middleware('auth');
 
 });
 
@@ -115,7 +115,7 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('/{category}/products', 'getProductsByCategory')->name('product.category.show');
 
     Route::post('/product/store', 'store')->name('product.store')          ->middleware('checkrole:admin');
-    Route::get('/product/{id}', 'show')->name('product.show')              ->middleware('auth');
+    Route::get('/product/{id}', 'show')->name('product.show');
     Route::get('/product/{id}/edit', 'edit')->name('product.edit')         ->middleware('checkrole:admin');
     Route::put('/product/{id}', 'update')->name('product.update')          ->middleware('checkrole:admin');
     Route::delete('/product/{id}/delete', 'delete')->name('product.delete')->middleware('checkrole:admin');
@@ -127,13 +127,13 @@ Route::controller(ProductImagesController::class)->group(function () {
     Route::delete('/product/image/{imageId}/delete', 'deleteImage')->name('product.delete.image')->middleware('checkrole:admin');
 });
 
-Route::controller(NewsController::class)->group(function () {
-    Route::get('/news/create', 'create')->name('news.create')            ->middleware('checkrole:admin,salesman');
-    Route::post('/news/store', 'store')->name('news.store')              ->middleware('checkrole:admin,salesman');
-    Route::get('/news/{newsId}', 'show')->name('news.show');
-    Route::get('/news', 'index')->name('news.index');
-    Route::get('/news/{newsId}/edit', 'edit')->name('news.edit')           ->middleware('checkrole:admin,salesman');
-    Route::put('/news/{newsId}', 'update')->name('news.update')          ->middleware('checkrole:admin,salesman');
+Route::prefix('news')->controller(NewsController::class)->group(function () {
+    Route::get('/create', 'create')->name('news.create')                 ->middleware('checkrole:admin,salesman');
+    Route::post('/store', 'store')->name('news.store')                   ->middleware('checkrole:admin,salesman');
+    Route::get('/{newsId}', 'show')->name('news.show');
+    Route::get('/', 'index')->name('news.index');
+    Route::get('/{newsId}/edit', 'edit')->name('news.edit')              ->middleware('checkrole:admin,salesman');
+    Route::put('/{newsId}', 'update')->name('news.update')               ->middleware('checkrole:admin,salesman');
     Route::delete('/news/{newsId}/delete', 'delete')->name('news.delete')->middleware('checkrole:admin,salesman');
 });
 
