@@ -13,6 +13,7 @@ use App\Http\Controllers\ImageController;
 
 class NewsController extends Controller
 {
+
     public function create()
     {
         $tags = Tag::where('is_category', 0)->get();

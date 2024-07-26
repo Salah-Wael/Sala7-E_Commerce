@@ -5,7 +5,10 @@
 @endsection
 
 @section('content')
+
     @guest
+
+
         <!-- breadcrumb-section -->
         <div class="breadcrumb-section breadcrumb-bg">
             <div class="container">

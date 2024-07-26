@@ -13,6 +13,21 @@ use App\Http\Controllers\ImageController;
 
 class NewsController extends Controller
 {
+    protected $userId;
+
+    // public function __construct()
+    // {
+    //     $this->middleware(function ($request, $next) {
+    //         if (Auth::check()) {
+    //             $this->userId = Auth::user()->id;
+    //         } else {
+    //             return redirect()->route('login');
+    //         }
+
+    //         return $next($request);
+    //     });
+    // }
+
     public function create()
     {
         $tags = Tag::where('is_category', 0)->get();

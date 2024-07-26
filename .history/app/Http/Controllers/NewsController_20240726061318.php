@@ -13,6 +13,21 @@ use App\Http\Controllers\ImageController;
 
 class NewsController extends Controller
 {
+    protected $userId;
+
+    // public function __construct()
+    // {
+    //     $this->middleware(function ($request, $next) {
+    //         if (Auth::check()) {
+    //             $this->userId = Auth::user()->id;
+    //         } else {
+    //             return redirect()->route('login');
+    //         }
+
+    //         return $next($request);
+    //     });
+    // }
+
     public function create()
     {
         $tags = Tag::where('is_category', 0)->get();
@@ -192,7 +207,7 @@ class NewsController extends Controller
                 return ErrorController::error404();
             });
 
-        if (((auth()->user()->role == 'admin') || (auth()->user()->role == 'salesman' && Auth::user()->id == $news->user_id))) {
+        if (((auth()->user()->role == 'admin') || (auth()->user()->role == 'salesman' && $this->userId == $news->user_id))) {
 
             File::delete(public_path('assets/img/news/') . $news->image);
             DB::table('news')->where('id', $newsId)->delete();

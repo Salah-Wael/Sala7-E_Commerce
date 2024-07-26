@@ -58,17 +58,17 @@ class ProductController extends Controller
             return view('error.404')->with(['message' => 'Product ID not found']);
         });
 
-        $priceRangePercentage = 0.20;
-        $minPrice = $product->price * (1 - $priceRangePercentage);
-        $maxPrice = $product->price * (1 + $priceRangePercentage);
+            $priceRangePercentage = 0.20;
+            $minPrice = $product->price * (1 - $priceRangePercentage);
+            $maxPrice = $product->price * (1 + $priceRangePercentage);
 
-        $related = Product::where('category_name', '=', $product->category_name)
-            ->where('id', '!=', $productId)
-            ->whereBetween('price', [$minPrice, $maxPrice])
-            ->orderBy('price', 'desc')
-            ->get();
+            $related = Product::where('category_name', '=', $product->category_name)
+                ->where('id', '!=', $productId)
+                ->whereBetween('price', [$minPrice, $maxPrice])
+                ->orderBy('price', 'desc')
+                ->get();
 
-        $qrCode = QrCode::size(300)->generate('https://sala7.great-site.net/product/'.$productId);
+            $qrCode = QrCode::size(300)->generate('https://sala7.great-site.net/product/'.$productId);
 
         return view('product.show', compact('product', 'related', 'productImages', 'qrCode'));
     }
